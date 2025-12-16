@@ -8,9 +8,23 @@
     <script src="scrips.js defer"></script>
 </head>
 <body>
-    <h1>Welcome!</h1>
+    <h1>Welcome to your diary!</h1>
     <div>
-        <a th:href="@{/newPost}">X</a>
+        <form method="post" th:action="@{/newPost}">
+            <label >Title <input type="text" name="title"></label>
+
+            <label>Content <input type="text" name="text"></label>
+            
+            <label >Date <input type="date" name="date"></label>
+
+
+            <button>Save</button>
+        </form>
+    </div>
+    <div>
+        <ul>
+            <li th:each=" post : ${posts}"><span th:text="${post.title}"></span></li>
+        </ul>
     </div>
     
 </body>
