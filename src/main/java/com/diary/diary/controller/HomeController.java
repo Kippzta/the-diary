@@ -1,0 +1,25 @@
+package com.diary.diary.controller;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.diary.diary.model.DiaryPost;
+import com.diary.diary.repositories.DiaryRepository;
+
+@Controller
+public class HomeController {
+
+    @Autowired
+
+    private DiaryRepository diaryRepository;
+
+    @GetMapping("/home")
+    private String getHome(){
+        return "home";
+    }
+
+}
