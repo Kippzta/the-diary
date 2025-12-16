@@ -8,9 +8,9 @@
     <script src="scrips.js defer"></script>
 </head>
 <body>
-    <div>
-        
-    </div>
-    
+    <h1 th:text="${post.title}"></h1>
+    <p> Content: <br><span th:text="${post.text}"></span></p>
+    <p> Date: <span th:text="${post.date}"></span></p>
+    <a th:href="@{/home}">Back</a>
 </body>
 </html>

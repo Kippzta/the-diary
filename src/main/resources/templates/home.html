@@ -11,19 +11,21 @@
     <h1>Welcome to your diary!</h1>
     <div>
         <form method="post" th:action="@{/newPost}">
-            <label >Title <input type="text" name="title"></label>
+            <label >Title <input type="text" name="title" required></label>
 
-            <label>Content <input type="text" name="text"></label>
+            <label>Content <input type="text" name="text" required></label>
             
-            <label >Date <input type="date" name="date"></label>
+            <label >Date <input type="date" name="date" required></label>
 
-
+            
             <button>Save</button>
         </form>
     </div>
     <div>
         <ul>
-            <li th:each=" post : ${posts}"><span th:text="${post.title}"></span></li>
+            <li th:each=" post : ${posts}">
+                <a th:href="@{/showPost/{id}(id=${post.postId})}" th:text="${post.title}"></a>
+            </li>
         </ul>
     </div>
     

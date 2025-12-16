@@ -18,7 +18,7 @@ public class HomeController {
 
     private DiaryRepository diaryRepository;
 
-    @GetMapping("/home")
+    @GetMapping({"/", "/home"})
     private String getHome(Model model){
 
         model.addAttribute("posts", diaryRepository.findAll());
