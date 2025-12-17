@@ -1,6 +1,6 @@
 package com.diary.diary.controller;
 
-import java.time.LocalDate;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.diary.diary.model.DiaryPost;
 import com.diary.diary.repositories.DiaryRepository;
+
+
+
+
 
 @Controller
 public class PostController {
@@ -34,5 +38,14 @@ public class PostController {
         model.addAttribute("post", post);
         return "showPost";
     }
+    
+    @PostMapping("/editPost/{postId}")
+    private String editPost(@ModelAttribute DiaryPost diaryPost) {
+        
+        diaryRepository.save(diaryPost);
+
+        return "redirect:/showPost/" + diaryPost.getPostId();
+    }
+    
 
 }
