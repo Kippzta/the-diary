@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1 class="homeH">Welcome to your diary!</h1>
+    <h3 class="homeH">What would like to write about today?</h3>
     <div id="postForm">
         <div class="postForm-container">
             <form method="post" th:action="@{/newPost}">
@@ -33,7 +34,11 @@
         <div class="postTitles-container">
             <ul class="post-list">
                 <li th:each=" post : ${posts}">
-                    <a th:href="@{/showPost/{id}(id=${post.postId})}" th:text="${post.title}"></a>
+                    <a th:href="@{/showPost/{id}(id=${post.postId})}" th:text="${post.title}">
+                    </a>
+                    <form method="post" th:action="@{/deletePost/{id}(id=${post.postId})}" style="display: inline;">
+                        <button onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                    </form>
                 </li>
             </ul>
         </div>

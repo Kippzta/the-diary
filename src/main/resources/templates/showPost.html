@@ -19,7 +19,12 @@
            </div> <br>
            <label><strong>Date:</strong></label>
            <span th:text="${post.date}"></span> <br>
-            <button id="editBtn">Edit</button><br>
+            <button id="editBtn" >Edit</button><br>
+            <form method="post" th:action="@{/deletePost/{id}(id=${post.postId})}">
+                <button id="deleteBtn" onclick="return confirm('Are you sure you want to delete this post? '
+                + 'If you choose yes you will be sent to the home screen after the post has been deleted.')"
+                >Delete</button> 
+            </form> <br>
             <a th:href="@{/home}">Back</a>
         </div>
         </div>
