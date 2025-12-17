@@ -1,14 +1,14 @@
 package com.diary.diary.controller;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.diary.diary.model.DiaryPost;
+
 import com.diary.diary.repositories.DiaryRepository;
 
 @Controller

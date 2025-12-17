@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entry</title>
-    <link rel="stylesheet" th:href="style.css">
-    <script src="scrips.js defer"></script>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <script th:src="@{/script.js}" defer></script>
 </head>
+
 <body>
-    <h1 th:text="${post.title}"></h1>
-    <p> Content: <br><span th:text="${post.text}"></span></p>
-    <p> Date: <span th:text="${post.date}"></span></p>
-    <a th:href="@{/home}">Back</a>
+    <div id="viewPost">
+        <div class="viewPost-container">
+            <h1 th:text="${post.title}"></h1>
+           <label> <strong>Content:</strong></label> 
+           <div>
+               <span th:text="${post.text}" id="textSpan"></span>
+           </div> <br>
+           <label><strong>Date:</strong></label>
+           <span th:text="${post.date}"></span> <br>
+            <button id="editBtn">Edit</button><br>
+            <a th:href="@{/home}">Back</a>
+        </div>
+        </div>
+        <!-- Popup modal som är gömd tills man trycker på edit -->
+    <div id="editModal" class="modal" style="display: none;">
+        <div class="modal-container">
+            <form method="post" th:action="@{/editPost/{id}(id=${post.postId})}">
+                <label>Title: </label>
+                <input type="text" name="title" th:value="${post.title}" required><br>
+
+                <label>Content: </label>
+                <textarea name="text" id="editTextArea" required rows="5" cols="40" th:text="${post.text}"></textarea><br>
+
+                <label>Date: </label><input type="date" name="date" th:value="${post.date}" required><br>
+
+                <button id="editAndSaveBtn">Edit & Save</button> <br>
+                <a th:href="@{/showPost/{id}(id=${post.postId})}">Cancel</a>
+            </form>
+        </div>
+
+    </div>
 </body>
+
 </html>
