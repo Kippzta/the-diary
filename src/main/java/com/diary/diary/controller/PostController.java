@@ -1,7 +1,5 @@
 package com.diary.diary.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +44,15 @@ public class PostController {
 
         return "redirect:/showPost/" + diaryPost.getPostId();
     }
+
+    @PostMapping("/deletePost/{postId}") 
+        private String deletePost (@PathVariable int postId) {
+
+            diaryRepository.deleteById(postId);
+
+            return "redirect:/home";
+        }
+}
     
 
-}
+
