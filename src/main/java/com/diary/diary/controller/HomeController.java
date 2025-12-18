@@ -14,11 +14,10 @@ public class HomeController {
 
     private DiaryRepository diaryRepository;
 
-    @GetMapping({"/", "/home"})
-    private String getHome(Model model){
-
-        model.addAttribute("posts", diaryRepository.findAll());
-
+    // Metod för att visa alla poster på startsidan (home)
+    @GetMapping({ "/", "/home" })
+    private String getHome(Model model) {
+        model.addAttribute("posts", diaryRepository.findByDateLessThanEqual(java.time.LocalDate.now()));
         return "home";
     }
 
