@@ -13,22 +13,21 @@
     <div id="viewPost">
         <div class="viewPost-container">
             <h1 th:text="${post.title}"></h1>
-           <label> <strong>Content:</strong></label> 
-           <div>
-               <span th:text="${post.text}" id="textSpan"></span>
-           </div> <br>
-           <label><strong>Date:</strong></label>
-           <span th:text="${post.date}"></span> <br>
-            <button id="editBtn" >Edit</button><br>
+            <label> <strong>Content:</strong></label>
+            <span th:text="${post.text}" id="textSpan"></span><br>
+            <label><strong>Date:</strong></label>
+            <span th:text="${post.date}" id="dateSpan"></span> <br>
+            <button id="editBtn">Edit</button><br>
             <form method="post" th:action="@{/deletePost/{id}(id=${post.postId})}">
-                <button id="deleteBtn" onclick="return confirm('Are you sure you want to delete this post? '
-                + 'If you choose yes you will be sent to the home screen after the post has been deleted.')"
-                >Delete</button> 
+                <button id="deleteBtn"
+                    onclick="return confirm('Are you sure you want to delete this post? '
+                + 'If you choose yes you will be sent to the home screen after the post has been deleted.')">Delete</button>
             </form> <br>
             <a th:href="@{/home}">Back</a>
         </div>
-        </div>
-        <!-- Popup modal som är gömd tills man trycker på edit -->
+    </div>
+
+    <!-- Popup modal som är gömd tills man trycker på edit -->
     <div id="editModal" class="modal" style="display: none;">
         <div class="modal-container">
             <form method="post" th:action="@{/editPost/{id}(id=${post.postId})}">
@@ -36,7 +35,8 @@
                 <input type="text" name="title" th:value="${post.title}" required><br>
 
                 <label>Content: </label>
-                <textarea name="text" id="editTextArea" required rows="5" cols="40" th:text="${post.text}"></textarea><br>
+                <textarea name="text" id="editTextArea" required rows="8" cols="40"
+                    th:text="${post.text}"></textarea><br>
 
                 <label>Date: </label><input type="date" name="date" th:value="${post.date}" required><br>
 
@@ -44,7 +44,6 @@
                 <a th:href="@{/showPost/{id}(id=${post.postId})}">Cancel</a>
             </form>
         </div>
-
     </div>
 </body>
 

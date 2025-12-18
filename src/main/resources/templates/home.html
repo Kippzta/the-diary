@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,41 +8,59 @@
     <link rel="stylesheet" th:href="@{/style.css}">
     <script th:src="@{/script.js}" defer></script>
 </head>
+
 <body>
     <h1 class="homeH">Welcome to your diary!</h1>
     <h3 class="homeH">What would like to write about today?</h3>
     <div id="postForm">
         <div class="postForm-container">
             <form method="post" th:action="@{/newPost}">
-                <label > <strong>Title:</strong></label> 
+                <label> <strong>Title:</strong></label>
                 <input type="text" name="title" required> <br>
-    
-                <label> <strong>Content:</strong></label>
-                    <textarea name="text" required rows="5" cols="40"></textarea> <br>
 
-                
-                <label > <strong>Date: </strong></label>
+                <label> <strong>Content:</strong></label>
+                <textarea name="text" required rows="5" cols="40"></textarea> <br>
+
+
+                <label> <strong>Date: </strong></label>
                 <input type="date" name="date" required> <br>
-    
-                
+
+
                 <button>Save</button>
             </form>
         </div>
-        </div>
+    </div>
 
-        <h2 class="homeH">Your entries<br></h2>
+    
+    <h2 class="homeH">Your entries<br></h2>
+
+    <div id="filterForm">
+        <div class="filter-container">
+            <div th:if="${error}" style="color: red;">
+                <p th:text="${error}"></p>
+            </div>
+              <form method="get" th:action="@{/filterPost}">
+                  <label>From: <input type="date" name="from" required></label>
+                  <label>To: <input type="date" name="to" required></label>
+                  <button>Filter</button> <a th:href="@{/home}">Show all</a>
+              </form> 
+          </div>
+    </div>
+
     <div id="postTitles">
         <div class="postTitles-container">
             <ul class="post-list">
                 <li th:each=" post : ${posts}">
                     <a th:href="@{/showPost/{id}(id=${post.postId})}" th:text="${post.title}">
                     </a>
-                    <form method="post" th:action="@{/deletePost/{id}(id=${post.postId})}" style="display: inline;">
-                        <button onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                    <span class="date-span" th:text="${post.date}"></span>
+                    <form class="deleteForm" method="post" th:action="@{/deletePost/{id}(id=${post.postId})}" style="display: inline;">
+                        <button id="deleteBtn" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                     </form>
                 </li>
             </ul>
         </div>
-        </div>
+    </div>
 </body>
+
 </html>
