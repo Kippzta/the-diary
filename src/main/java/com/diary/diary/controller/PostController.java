@@ -12,46 +12,54 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.diary.diary.DiaryService.DiaryService;
 import com.diary.diary.model.DiaryPost;
-import com.diary.diary.repositories.DiaryRepository;
+
+
+// Tar emot anropen från front-end gällande DiaryPost och använder DiaryService för att hantera logiken mot databasen
 
 @Controller
 public class PostController {
 
     @Autowired
+    // Aurowired gör så att Spring boot automatiskt skapar en instans av DiaryService
+    // Detta gör så att man slipper skapa en instans manuellt i varje metod den ska användas
+    private DiaryService diaryService;
 
-    // Repository för DiaryPost för att kunna hantera CRUD operationer ifrån min controller
-    private DiaryRepository diaryRepository;
+   
 
     // Metod för att lägga till en ny post
     // Sickar in ett helt DiaryPost objekt som skapas från formuläret i newPost.html
     // med attributen i ordning title, text och date.
+    // Använder service klassen för att spara posten i databasen
     @PostMapping("/newPost")
     private String addNewPost(@ModelAttribute DiaryPost diaryPost) {
-        diaryRepository.save(diaryPost);
-
+        diaryService.savePost(diaryPost);
         return "redirect:/home";
     }
 
     // Metod för att kunna visa en viss post baserat på dess ID
+    // Använder service klassen för att hämta posten från databasen
     @GetMapping("/showPost/{postId}")
     private String showPost(@PathVariable int postId, Model model) {
-        DiaryPost post = diaryRepository.findById(postId).orElse(null);
+        DiaryPost post = diaryService.findPostById(postId);
         model.addAttribute("post", post);
         return "showPost";
     }
 
     // Metod för att redigera en post baserat på dess ID
+    // Använder service klassen för att spara den redigerade posten i databasen
     @PostMapping("/editPost/{postId}")
     private String editPost(@ModelAttribute DiaryPost diaryPost) {
-        diaryRepository.save(diaryPost);
+        diaryService.savePost(diaryPost);
         return "redirect:/showPost/" + diaryPost.getPostId();
     }
 
     // Metod för att ta bort en post baserat på dess ID
+    // Använder service klassen för att ta bort posten från databasen
     @PostMapping("/deletePost/{postId}")
     private String deletePost(@PathVariable int postId) {
-        diaryRepository.deleteById(postId);
+        diaryService.deletePostById(postId);
         return "redirect:/home";
     }
 
@@ -60,17 +68,18 @@ public class PostController {
     // Kollar om "from" daturmet är efter "to" datumet
     // Kollar om listan är tom efter filtrering
     // om inget av detta är fallet så visas de filtrerade posterna utom framtida posts
+    // Använder service klassen för att hämta de filtrerade posterna från databasen
     @GetMapping("/filterPost")
     private String filterPost(@RequestParam("from") LocalDate from,
             @RequestParam("to") LocalDate to, Model model) {
 
         if (from.isAfter(to)) {
-            model.addAttribute("error", "From-date cant be after To-date when filtering.");
-            model.addAttribute("posts", diaryRepository.findByDateLessThanEqual(java.time.LocalDate.now()));
+            model.addAttribute("error", "From-date cant be after To-date when filtering sillygoose.");
+            model.addAttribute("posts", diaryService.findPostUpToCurrentDate(java.time.LocalDate.now()));
             return "home";
         }
 
-        List<DiaryPost> filteredPosts = diaryRepository.findByDateBetweenAndDateLessThanEqual(from, to, java.time.LocalDate.now());
+        List<DiaryPost> filteredPosts = diaryService.findPostBetweenDateAndUpToCurrentDate(from, to, java.time.LocalDate.now());
         if (filteredPosts.isEmpty()) {
             model.addAttribute("error", "There are no entries found between these dates.");
         }

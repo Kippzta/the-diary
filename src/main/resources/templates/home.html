@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <!-- Lite välkomstmeddelande och ett form för att skapa en ny entry/post -->
     <h1 class="homeH">Welcome to your diary!</h1>
     <h3 class="homeH">What would like to write about today?</h3>
     <div id="postForm">
@@ -21,17 +22,15 @@
                 <label> <strong>Content:</strong></label>
                 <textarea name="text" required rows="5" cols="40"></textarea> <br>
 
-
                 <label> <strong>Date: </strong></label>
                 <input type="date" name="date" required> <br>
-
 
                 <button>Save</button>
             </form>
         </div>
     </div>
 
-    
+    <!-- Form för att filtrera poster baserat på olika datum -->
     <h2 class="homeH">Your entries<br></h2>
 
     <div id="filterForm">
@@ -47,6 +46,7 @@
           </div>
     </div>
 
+    <!-- Lista över alla entries/posts som visas med titel och datum -->
     <div id="postTitles">
         <div class="postTitles-container">
             <ul class="post-list">
