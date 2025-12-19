@@ -7,10 +7,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
+// Entity för DiaryPost med attributen postId, title, text och date som varsin blir en kolumn i databasen
 @Entity
 public class DiaryPost {
-
+// Primary key för entityn blir postId
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int postId;

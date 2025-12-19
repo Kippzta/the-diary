@@ -10,13 +10,17 @@
 </head>
 
 <body>
+    <!-- Visar en enskild post med dess titel, innehåll och datum -->
     <div id="viewPost">
         <div class="viewPost-container">
             <h1 th:text="${post.title}"></h1>
+
             <label> <strong>Content:</strong></label>
             <span th:text="${post.text}" id="textSpan"></span><br>
+
             <label><strong>Date:</strong></label>
             <span th:text="${post.date}" id="dateSpan"></span> <br>
+
             <button id="editBtn">Edit</button><br>
             <form method="post" th:action="@{/deletePost/{id}(id=${post.postId})}">
                 <button id="deleteBtn"
@@ -27,7 +31,7 @@
         </div>
     </div>
 
-    <!-- Popup modal som är gömd tills man trycker på edit -->
+    <!-- Edit modal som är gömd tills man trycker på edit -->
     <div id="editModal" class="modal" style="display: none;">
         <div class="modal-container">
             <form method="post" th:action="@{/editPost/{id}(id=${post.postId})}">
