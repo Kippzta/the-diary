@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.diary.diary.DiaryService.DiaryService;
+import com.diary.diary.service.DiaryService;
 
 @Controller
 public class HomeController {

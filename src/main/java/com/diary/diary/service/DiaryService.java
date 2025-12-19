@@ -1,4 +1,4 @@
-package com.diary.diary.DiaryService;
+package com.diary.diary.service;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,6 +11,7 @@ import com.diary.diary.repositories.DiaryRepository;
 
 
 // Hjälp taget ifrån https://anilr9.medium.com/understanding-service-in-spring-boot-a-complete-guide-with-examples-b08825e8ccd8
+
 // Service klass som hatnterar logiken mellan controller och repository lagret
 // Controllern anropar metoder i denna klass för att hantera DiaryPost objekt
 // Denna klass skickar i sin tur anrop till DiaryRepository som hanterar operationerna motdatabasen

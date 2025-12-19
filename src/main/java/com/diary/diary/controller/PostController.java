@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.diary.diary.DiaryService.DiaryService;
+import com.diary.diary.service.DiaryService;
 import com.diary.diary.model.DiaryPost;
 
 
@@ -81,7 +81,7 @@ public class PostController {
 
         List<DiaryPost> filteredPosts = diaryService.findPostBetweenDateAndUpToCurrentDate(from, to, java.time.LocalDate.now());
         if (filteredPosts.isEmpty()) {
-            model.addAttribute("error", "There are no entries found between these dates.");
+            model.addAttribute("error", "No entries found between these dates.");
         }
         model.addAttribute("posts", filteredPosts);
         return "home";
