@@ -1,3 +1,18 @@
+## Getting Started
+
+1. Copy the example configuration file:
+
+   ```
+   cp src/main/resources/application-example.properties src/main/resources/application.properties
+   ```
+
+2. Open `src/main/resources/application.properties` and fill in your own database username and password (and other settings if needed).
+
+3. Make sure you have a MySQL database created and accessible with the credentials you entered.
+
+4. Start the application as usual.
+
+If you have any questions, see the comments in `application-example.properties` for guidance.
 # Diary
 
 A web-application where you can write, read, and edit diary posts/entries.
